@@ -4,7 +4,7 @@
     <img class="card-img" :src=" require('../assets/images/' + product_data.image)" alt="picture">
     <p class="card-text">{{ product_data.price }}</p>
     <p class="card-text">{{ product_data.about }}</p>
-    <button class="card-btn" @click="SendDataToPerant">Add to cart</button>
+    <button class="card-btn" @click="addToCard">Add to cart</button>
 </div>
 </template>
 <script>
@@ -23,8 +23,8 @@ export default {
     return {}
   },
   methods: {
-    SendDataToPerant () {
-      this.$emit('hello', this.product_data.article)
+    addToCard () {
+      this.$emit('addToCard', this.product_data)
     }
   }
 }

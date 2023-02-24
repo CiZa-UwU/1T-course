@@ -4,12 +4,14 @@
   <h3>Каталог:</h3>
   <vCatalog/>
   <h3>Корзина: </h3>
-  <vCart />
+  <vCart
+  v-if="CARD.length"
+  :card_data="CARD" />
 </template>
-
 <script>
 import vCatalog from './v-catalog.vue'
 import vCart from './v-cart.vue'
+import { mapGetters } from 'vuex'
 export default {
   name: 'v-main-wrapper',
   components: {
@@ -17,15 +19,13 @@ export default {
   },
   props: {},
   data () {
-    return {
-    }
+    return {}
   },
-  computed: {},
+  computed: {
+    ...mapGetters(['CARD'])
+  },
   methods: {},
-  watch: {},
-  mounted () {
-    console.log('Im alive')
-  }
+  watch: {}
 }
 </script>
 
