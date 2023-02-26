@@ -4,25 +4,36 @@ import axios from 'axios'
 export default createStore({
   state: {
     products: [],
-    card: []
+    cart: [],
+    sum: 0,
+    flag: 0
   },
   getters: {
     PRODUCTS (state) {
       return state.products
     },
-    CARD (state) {
-      return state.card
+    CART (state) {
+      return state.cart
+    },
+    SUM (state) {
+      return state.sum
     }
   },
   mutations: {
     SET_PRODUCTS_TO_STATE: (state, products) => {
       state.products = products
     },
-    SET_CARD: (state, product) => {
-      state.card.push(product)
+    SET_CART: (state, product) => {
+      state.cart.push(product)
     },
     REMOVE_FROM_CART: (state, index) => {
-      state.card.splice(index, 1)
+      state.cart.splice(index, 1)
+    },
+    SET_COST: (state, product) => {
+      state.sum += product.price
+    },
+    SUBTRACT_COST: (state, index) => {
+      state.sum -= state.cart[index].price
     }
   },
   actions: {
@@ -39,11 +50,17 @@ export default createStore({
           return error
         })
     },
-    ADD_TO_CARD ({ commit }, product) {
-      commit('SET_CARD', product)
+    ADD_TO_CART ({ commit }, product) {
+      commit('SET_CART', product)
     },
     DELETE_FROM_CART ({ commit }, index) {
       commit('REMOVE_FROM_CART', index)
+    },
+    SET_COST ({ commit }, product) {
+      commit('SET_COST', product)
+    },
+    SUBTRACT_COST ({ commit }, index) {
+      commit('SUBTRACT_COST', index)
     }
   },
   modules: {

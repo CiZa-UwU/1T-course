@@ -1,23 +1,17 @@
   <template>
-    <div class="v-cart-item">
-      <p class="card-header">{{ card_item_data.name }}</p>
-      <img class="card-img" :src=" require('../assets/images/' + card_item_data.image)" alt="picture">
-      <p class="card-text">{{ card_item_data.price }}</p>
-      <p class="card-text">{{ card_item_data.about }}</p>
-    <div class="v-card-item__quantity">
-      <p>Quantity</p>
-      <span>
-        {{ card_item_data.quantity }}
-      </span>
-      <button @click="deleteFromCart">Delete</button>
-    </div>
-  </div>
+      <div class="v-cart-item col-3 my-3 shadow py-4 mx-5">
+        <p class="card-header">{{ cart_item_data.name }}</p>
+        <img class="card-img pb-4" :src=" require('../assets/images/' + cart_item_data.image)" alt="picture">
+        <p class="card-text fs-4">{{ cart_item_data.price }} ₽</p>
+        <p class="card-text">{{ cart_item_data.about }}</p>
+        <button @click="deleteFromCart" class="btn btn-danger round">Delete</button>
+      </div>
   </template>
 <script>
 export default {
   name: 'v-cart-item',
   props: {
-    card_item_data: {
+    cart_item_data: {
       type: Object,
       default () {
         return {}
