@@ -4,6 +4,7 @@
         <img class="card-img pb-4" :src=" require('../assets/images/' + cart_item_data.image)" alt="picture">
         <p class="card-text fs-4">{{ cart_item_data.price }} ₽</p>
         <p class="card-text">{{ cart_item_data.about }}</p>
+        <p class="card-text">Кол-во: {{ cart_item_data.quantity }}</p>
         <button @click="deleteFromCart" class="btn btn-danger round">Delete</button>
       </div>
   </template>

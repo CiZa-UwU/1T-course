@@ -10,12 +10,11 @@
           :key="product.article"
           :product_data="product"
           @addToCart = "addToCart"
-          @setCost = "setCost"
         />
       </div>
       <router-link :to="{name: 'cart'}">
-        <div class="v-catalog__link_to_cart text-start text-start my-3">
-          Товаров в корзине: {{ CART.length }}
+        <div class="v-catalog__link_to_cart text-start text-start my-3 td">
+          Товаров в корзине: {{ QUANTITY_G }}
         </div>
       </router-link>
     </div>
@@ -32,16 +31,13 @@ export default {
     return {}
   },
   methods: {
-    ...mapActions(['GET_PRODUCTS_FROM_API', 'ADD_TO_CART', 'SET_COST']),
+    ...mapActions(['GET_PRODUCTS_FROM_API', 'ADD_TO_CART']),
     addToCart (data) {
       this.ADD_TO_CART(data)
-    },
-    setCost (product) {
-      this.SET_COST(product)
     }
   },
   computed: {
-    ...mapGetters(['PRODUCTS', 'CART'])
+    ...mapGetters(['PRODUCTS', 'CART', 'QUANTITY_G'])
   },
   mounted () {
     this.GET_PRODUCTS_FROM_API()
@@ -54,5 +50,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+a{
+  text-decoration: none;
+}
 </style>

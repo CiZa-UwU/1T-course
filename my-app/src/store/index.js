@@ -6,7 +6,8 @@ export default createStore({
     products: [],
     cart: [],
     sum: 0,
-    flag: 0
+    flag: 0,
+    quantity_g: 0
   },
   getters: {
     PRODUCTS (state) {
@@ -17,6 +18,9 @@ export default createStore({
     },
     SUM (state) {
       return state.sum
+    },
+    QUANTITY_G (state) {
+      return state.quantity_g
     }
   },
   mutations: {
@@ -24,16 +28,25 @@ export default createStore({
       state.products = products
     },
     SET_CART: (state, product) => {
-      state.cart.push(product)
-    },
-    REMOVE_FROM_CART: (state, index) => {
-      state.cart.splice(index, 1)
-    },
-    SET_COST: (state, product) => {
+      if (product.quantity === 0) {
+        state.cart.push(product)
+        product.quantity++
+        state.quantity_g++
+      } else {
+        product.quantity++
+        state.quantity_g++
+      }
       state.sum += product.price
     },
-    SUBTRACT_COST: (state, index) => {
+    REMOVE_FROM_CART: (state, index) => {
       state.sum -= state.cart[index].price
+      state.quantity_g--
+      if (state.cart[index].quantity === 1) {
+        state.cart[index].quantity--
+        state.cart.splice(index, 1)
+      } else {
+        state.cart[index].quantity--
+      }
     }
   },
   actions: {
@@ -55,12 +68,6 @@ export default createStore({
     },
     DELETE_FROM_CART ({ commit }, index) {
       commit('REMOVE_FROM_CART', index)
-    },
-    SET_COST ({ commit }, product) {
-      commit('SET_COST', product)
-    },
-    SUBTRACT_COST ({ commit }, index) {
-      commit('SUBTRACT_COST', index)
     }
   },
   modules: {

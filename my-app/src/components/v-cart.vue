@@ -2,7 +2,9 @@
     <div class="v-cart">
       <div class="container">
       <router-link :to="{ name:'catalog'}">
+        <keep-alive>
         <button class="my-3 btn btn-secondary round">Back to catalog</button>
+        </keep-alive>
       </router-link>
       <p v-if="!CART.length">You havent got any products</p>
       <div class="row mt-3">
@@ -33,9 +35,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['DELETE_FROM_CART', 'SUBTRACT_COST']),
+    ...mapActions(['DELETE_FROM_CART']),
     deleteFromCart (index) {
-      this.SUBTRACT_COST(index)
       this.DELETE_FROM_CART(index)
     }
   },
