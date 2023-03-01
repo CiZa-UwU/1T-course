@@ -25,7 +25,6 @@ export default {
   methods: {
     addToCart () {
       this.$emit('addToCart', this.product_data)
-      this.$emit('setCost', this.product_data)
     }
   }
 }

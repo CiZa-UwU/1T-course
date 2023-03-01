@@ -5,9 +5,7 @@ export default createStore({
   state: {
     products: [],
     cart: [],
-    sum: 0,
-    flag: 0,
-    quantity_g: 0
+    sum: 0
   },
   getters: {
     PRODUCTS (state) {
@@ -20,7 +18,9 @@ export default createStore({
       return state.sum
     },
     QUANTITY_G (state) {
-      return state.quantity_g
+      return state.cart.reduce((sum, product) => {
+        return sum + product.quantity
+      }, 0)
     }
   },
   mutations: {
@@ -31,16 +31,13 @@ export default createStore({
       if (product.quantity === 0) {
         state.cart.push(product)
         product.quantity++
-        state.quantity_g++
       } else {
         product.quantity++
-        state.quantity_g++
       }
       state.sum += product.price
     },
     REMOVE_FROM_CART: (state, index) => {
       state.sum -= state.cart[index].price
-      state.quantity_g--
       if (state.cart[index].quantity === 1) {
         state.cart[index].quantity--
         state.cart.splice(index, 1)
