@@ -29,7 +29,7 @@
             <button
             :class="todo.done ? 'is-success' : 'is-light'"
             @click="togglerDone(todo.id)"
-            class="button is-light">&check;</button>
+            class="button">&check;</button>
             <button 
             @click="deleteToDo(todo.id)"
             class="button is-danger ml-2">&cross;</button>
@@ -45,25 +45,25 @@
 //  import
 import { ref,onMounted } from 'vue'
 import { v4 as uid } from 'uuid'
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, onSnapshot } from 'firebase/firestore'
 import { db } from '@/firebase'
 
 //  todos
 const todos = ref([])
 // getToDos
-onMounted( async ()=>{
-  const querySnapshot = await getDocs(collection(db, "todos"));
-  let fbToDos = []  
-  querySnapshot.forEach((doc) => {
-  console.log(doc.id, " => ", doc.data());
-    const todo = {
-      id: doc.id,
-      content: doc.data().content,
-      done: doc.data().done
-    }
-    fbToDos.push(todo)
+onMounted(() => {
+  onSnapshot(collection(db,'todos'), (querySnapshot) => {
+    const fbToDos = [];
+    querySnapshot.forEach((doc) => {
+      const todo = {
+        id: doc.id,
+        content: doc.data().content,
+        done: doc.data().done
+      }
+      fbToDos.push(todo)
+    });
+    todos.value = fbToDos
   });
-  todos.value = (fbToDos)
 })
 //  methods
 const newToDoContent = ref("")
