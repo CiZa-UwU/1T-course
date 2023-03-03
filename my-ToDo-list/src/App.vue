@@ -1,6 +1,6 @@
 <template>
+  <div class="text-end"><a>Войдите</a> или <a> зарегестрируйтесь </a></div>
   <div class="wrapper-todo">
-
    <form @submit.prevent="addToDo">
     <div class="title has-text-centered">My ToDo list!</div>
     <div class="field has-addons mb-5">
@@ -42,6 +42,7 @@
 </template>
 
 <script setup>
+
 //  import
 import { ref,onMounted } from 'vue'
 import { collection, onSnapshot, addDoc, doc, deleteDoc, updateDoc, query, orderBy } from 'firebase/firestore'
