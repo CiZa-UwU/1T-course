@@ -12,10 +12,16 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          My to-do list app
         </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
+        <div class="q-pa-md q-gutter-y-md column items-start">
+          <q-btn-group push>
+            <q-btn push label="First" icon="timeline" />
+            <q-btn push label="Second" icon="visibility" />
+            <q-btn push label="Third" icon="update" />
+          </q-btn-group>
+        </div>
+        <div>made with Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
