@@ -1,5 +1,18 @@
 <template>
   <q-page class="bg-grey-3 q-px-md">
+    <div class="row q-pa-sm">
+      <q-input
+      @keyup.enter = "AddTask" 
+      class="col-8"      
+      v-model="NewTask" label="Add new ToDo"
+      >
+      <template v-slot:append>
+        <q-btn round icon="add"
+        @click="AddTask"
+        :disabled="!NewTask"/>
+      </template>
+      </q-input>
+    </div>
     <div class="row">
     <q-list class="col-8">
       <q-item 
@@ -32,6 +45,7 @@
 export default{
   data(){
     return{
+      NewTask: "",
       tasks: [
         {
           title: 'Hello vue',
@@ -60,6 +74,15 @@ export default{
         this.tasks.splice(index, 1)
         this.$q.notify("Task deleted")
       })
+    },
+    AddTask(){
+      if(this.NewTask){
+      this.tasks.push({
+        title: this.NewTask,
+        done: false
+      })
+      this.NewTask = ""
+      }
     }
   }
 }
