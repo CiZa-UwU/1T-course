@@ -15,7 +15,6 @@
         <div class="text-h4">My ToDo-list</div>
         <div class="text-subtitle">{{ todayDate }}</div>
       </div>
-      <q-img src="../assets/BrandYourself-Logo1.png" class="header-image absolute-top"/>
     </q-header>
 
     <q-drawer
@@ -106,13 +105,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.header-image{
-  height: 100%;
-  width: 35%;
-  z-index: -1;
-  opacity: 0.3;
-  margin-left: 400px;
-}
 .image{
   background-color: $primary;
 }

@@ -1,9 +1,9 @@
 <template>
-  <q-page class="column bg-grey-3">
-    <q-list
-    separator
-    bordered>
-      <q-item
+  <q-page class="bg-grey-3 q-px-md">
+    <div class="row">
+    <q-list class="col-8">
+      <q-item 
+      class="q-my-md todo"
       @click="task.done = !task.done"
       clickable
       :class="{'done bg-green-1': task.done}"
@@ -24,6 +24,7 @@
         </q-item-section>
       </q-item>
     </q-list>
+  </div>
   </q-page>
 </template>
 
@@ -49,7 +50,16 @@ export default{
   },
   methods:{
     deleteTask(index){
-      this.tasks.splice(index, 1)
+      this.$q.dialog({
+        title: "Confirm",
+        message: "Delete ToDo?" ,
+        cancel: true,
+        persistent: true
+      })
+      .onOk(()=>{
+        this.tasks.splice(index, 1)
+        this.$q.notify("Task deleted")
+      })
     }
   }
 }
@@ -60,5 +70,8 @@ export default{
     text-decoration: line-through;
     color: grey;
   }
+}
+.todo{
+  border: 1px solid rgba(86,61,124,.2)
 }
 </style>
