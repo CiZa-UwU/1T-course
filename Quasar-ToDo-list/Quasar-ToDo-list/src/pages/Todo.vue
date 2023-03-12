@@ -41,7 +41,7 @@
   <div class="absolute-center no-tasks" v-if="!tasks.length">
     <q-icon
     name="check"
-    size="150px"
+    size="155px"
     />
     <div class="text-h4 text-center">No Tasks!</div>
   </div>
